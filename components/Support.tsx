@@ -1,8 +1,24 @@
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { Users, Video, UserCheck, Calendar, Clock, ArrowRight, Shield } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+const FallbackImg: React.FC<React.ImgHTMLAttributes<HTMLImageElement> & { fallbackSrc?: string }> = ({ fallbackSrc = "https://placehold.co/800x400?text=Image", onError, ...props }) => {
+	const [errored, setErrored] = useState(false);
+	return (
+		<img
+			{...props}
+			onError={(e) => {
+				if (!errored) {
+					setErrored(true);
+					(e.currentTarget as HTMLImageElement).src = fallbackSrc!;
+				}
+				if (onError) onError(e);
+			}}
+		/>
+	);
+};
 
 const peerGroups = [
 	{
@@ -141,7 +157,7 @@ export function Support() {
 							</div>
 
 							<div className="relative h-96 md:h-auto">
-								<ImageWithFallback
+								<FallbackImg
 									src="https://images.unsplash.com/photo-1758273240360-76b908e7582a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVyYXB5JTIwY291bnNlbGluZyUyMHN1cHBvcnR8ZW58MXx8fHwxNzYxODQ5ODMyfDA&ixlib=rb-4.1.0&q=80&w=1080"
 									alt="Professional support"
 									className="w-full h-full object-cover"

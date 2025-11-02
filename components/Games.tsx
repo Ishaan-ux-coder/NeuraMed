@@ -1,8 +1,28 @@
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { Play, Smile, Brain, Heart, TrendingUp, ArrowRight } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Link } from "react-router-dom";
+
+const FallbackImg: React.FC<React.ImgHTMLAttributes<HTMLImageElement> & { fallbackSrc?: string }> = ({
+	fallbackSrc = "https://placehold.co/800x400?text=Image",
+	onError,
+	...props
+}) => {
+	const [errored, setErrored] = useState(false);
+	return (
+		<img
+			{...props}
+			onError={(e) => {
+				if (!errored) {
+					setErrored(true);
+					(e.currentTarget as HTMLImageElement).src = fallbackSrc!;
+				}
+				if (onError) onError(e);
+			}}
+		/>
+	);
+};
 
 const games = [
 	{
@@ -120,7 +140,7 @@ export function Games() {
 						>
 							<div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all border border-purple-100">
 								<div className="relative h-56 overflow-hidden">
-									<ImageWithFallback
+									<FallbackImg
 										src={game.image}
 										alt={game.title}
 										className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
