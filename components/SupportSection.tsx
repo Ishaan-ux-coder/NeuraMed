@@ -1208,3 +1208,9 @@ const TherapistProfile = ({ therapistId }) => {
       <p>{therapistDetails.licenseIssuingAuthority}</p>
       <p>{therapistDetails.licenseStatus}</p>
       <p>{therapistDetails.licenseExpiration}</p>
+      <p>{therapistDetails.licenseIssuingAuthority}</p>
+        <p>{therapistDetails.licenseStatus}</p>
+        <p>{therapistDetails.licenseExpiration}</p>
+        <p>{therapistDetails.licenseIssuingAuthority}</p>
+        <p>{therapistDetails.licenseStatus}</p>
+        <p>{therapistDetails.licenseExpiration}</p>
