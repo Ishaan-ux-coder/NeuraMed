@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { Heart, Menu, X } from "lucide-react";
 import { useState } from "react";
 import AuthNav from "../src/components/AuthNav";
+import { Link } from "react-router-dom";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +11,7 @@ export function Navbar() {
   const menuItems = [
     { name: "Home", href: "#home" },
     { name: "Features", href: "#features" },
-    { name: "Shop", href: "#shop" },
+    { name: "Shop", href: "/shop" },
     { name: "Mindfulness", href: "#mindfulness" },
     { name: "Games", href: "#games" },
     { name: "Support", href: "#support" },
